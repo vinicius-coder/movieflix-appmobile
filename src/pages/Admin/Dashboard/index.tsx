@@ -1,11 +1,9 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, ScrollView, StyleSheet, View } from 'react-native';
+import { getMovies } from '../../../services';
 import { MovieProps } from '../../../@types/MovieProps';
 
 import MovieCard from '../../../core/components/MovieCard';
-import { getMovies } from '../../../services';
 
 import { colors } from '../../../styles/global';
 
@@ -48,7 +46,7 @@ const Dashboard: React.FC = () => {
                                     key={movie.id}
                                     {...movie}
                                 />
-                        ))
+                            ))
                         )
                 }
             </ScrollView>
@@ -62,7 +60,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.secondary,
-
         justifyContent: "center",
         alignItems: "center",
     },

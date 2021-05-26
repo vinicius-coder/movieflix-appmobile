@@ -5,16 +5,21 @@ import { colors } from '../../../styles/global';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { MovieProps } from '../../../@types/MovieProps';
 
-import imgMovie from '../../assets/movie.png';
-
 import fonts from '../../../styles/fonts';
+import { useNavigation } from '@react-navigation/native';
 
-const MovieCard: React.FC<MovieProps> = ({id, title, year, imgUrl, subTitle}) => {
+const MovieCard: React.FC<MovieProps> = ({ id, title, year, imgUrl, subTitle }) => {
+
+    const navigation = useNavigation();
+
+    function handleDetails(id: number) {
+        navigation.navigate("MovieDetails", { id });
+    }
 
     return (
         <View style={styles.container}>
             <Image
-                source={{uri: imgUrl}}
+                source={{ uri: imgUrl }}
                 style={styles.imgMovie}
             />
             <View style={styles.content}>
@@ -25,6 +30,7 @@ const MovieCard: React.FC<MovieProps> = ({id, title, year, imgUrl, subTitle}) =>
                 <TouchableOpacity
                     style={styles.button}
                     activeOpacity={0.7}
+                    onPress={() => { handleDetails(id) }}
                 >
                     <Text style={styles.buttonText}>Ver Detalhes</Text>
                 </TouchableOpacity>
@@ -42,6 +48,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.card,
         marginHorizontal: 20,
         marginTop: 18,
+        borderRadius: 10
     },
 
     imgMovie: {
