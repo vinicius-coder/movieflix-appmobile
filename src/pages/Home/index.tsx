@@ -6,6 +6,7 @@ import drawImg from '../../core/assets/draw.png';
 import arrowImg from '../../core/assets/arrow.png';
 
 import { text, theme } from '../../styles/global';
+import Button from '../../core/components/Button';
 
 const Home: React.FC = () => {
 
@@ -15,23 +16,16 @@ const Home: React.FC = () => {
 
         <View style={theme.container}>
 
-                <Image source={drawImg} style={theme.draw} />
+            <Image source={drawImg} style={theme.draw} />
 
-                <Text style={text.homeTitle}>Avalie filmes</Text>
-                <Text style={text.homeSubtitle}>Digo o que você achou do seu {"\n"} filme favorito</Text>
+            <Text style={text.homeTitle}>Avalie filmes</Text>
+            <Text style={text.homeSubtitle}>Digo o que você achou do seu {"\n"} filme favorito</Text>
 
-                <TouchableOpacity
-                    style={theme.primaryButton}
-                    activeOpacity={0.8}
-                    onPress={() => navigation.navigate("Login")}
-                >
-                    <View style={theme.buttonText}>
-                        <Text style={text.primaryText}>Fazer Login</Text>
-                    </View>
-                    <View style={theme.arrowContainer}>
-                        <Image source={arrowImg} />
-                    </View>
-                </TouchableOpacity>
+           <Button
+            onPress={()=>navigation.navigate("Login")}
+            >
+                Fazer Login
+            </Button>
 
         </View>
 

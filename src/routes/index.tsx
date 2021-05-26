@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import Home from '../pages/Home';
 
 import { colors, text } from '../styles/global';
+import Dashboard from '../pages/Admin/Dashboard';
 
 const App = createStackNavigator();
 
@@ -25,6 +26,7 @@ const Routes: React.FC = () => {
         >
             <App.Screen name="Home" component={Home} />
             <App.Screen name="Login" component={Login} />
+            <App.Screen name="Dashboard" component={Dashboard} />
 
         </App.Navigator>
     );

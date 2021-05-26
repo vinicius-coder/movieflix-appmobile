@@ -1,15 +1,18 @@
 import { StyleSheet } from 'react-native';
+import fonts from './fonts';
 
 export const colors = {
     white: "#FFFFFF",
     black: "#000000",
     lightGray: "#F2F2F2",
-    mediumGray: "#9E9E9E",
+    mediumGray: "#BFBFBF",
     darkGray: "#263238",
     black30: "#00000033",
     primary: "#FFC700",
+    card: "#6C6C6C",
     secondary: "#525252",
     borderGray: "#E1E1E1",
+    textColor: "#CDCDCD",
 }
 
 export const text = StyleSheet.create({
@@ -17,14 +20,14 @@ export const text = StyleSheet.create({
     HeaderText: {
         color: colors.black,
         fontSize: 18,
-        fontWeight: "700",
+        fontFamily: fonts.bold,
         marginLeft: 45,
     },
 
     homeTitle: {
         color: colors.white,
         fontSize: 26,
-        fontWeight: "700",
+        fontFamily: fonts.bold,
     },
 
     homeSubtitle: {
@@ -37,21 +40,40 @@ export const text = StyleSheet.create({
 
     primaryText: {
         fontSize: 16,
-        fontWeight: "700",
+        fontFamily: fonts.bold,
         textTransform: "uppercase",
         color: colors.black,
-        marginLeft: 50,
+        marginLeft: 65,
     },
+
+    loginTitle: {
+        textTransform: "uppercase",
+        fontSize: 30,
+        fontWeight: "400",
+        marginTop: 90,
+        marginBottom: 50,
+        color: colors.white,
+    }
 
 });
 
 export const theme = StyleSheet.create({
 
+    authContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingHorizontal: 20,
+        fontFamily: fonts.text,
+        paddingBottom: 150,
+        backgroundColor: colors.secondary,
+    },
+
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        padding: 20,
+        paddingHorizontal: 20,
         backgroundColor: colors.secondary,
     },
 
@@ -73,7 +95,7 @@ export const theme = StyleSheet.create({
     draw: {
         width: 313,
         height: 225,
-        marginTop: 40,
+        marginTop: 50,
         marginBottom: 40,
     },
 
@@ -100,6 +122,36 @@ export const theme = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: "#26323850",
+    },
+
+    form: {
+        marginVertical: 10,
+    },
+
+    passwordGroup: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: 25,
+    },
+
+    textInput: {
+        width: 290,
+        height: 50,
+        borderWidth: 1,
+        borderColor: colors.mediumGray,
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        padding: 10,
+    },
+
+    toggle: {
+        margin: -40
+    },
+    
+    buttonContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-around",
     },
 
 });
