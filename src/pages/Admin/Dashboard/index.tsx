@@ -61,55 +61,56 @@ const Dashboard: React.FC = () => {
                     <ActivityIndicator size="large" />
                 ) : (
                     <View>
-                        <Modal
-                            visible={showGenres}
-                            animationType="fade"
-                            transparent={true}
-                            presentationStyle="overFullScreen"
 
-                        >
-                            <View style={styles.modalContainer}>
-                                <ScrollView
-                                    contentContainerStyle={styles.modalContent}
-                                >
-                                    {
-                                        genres.map(
-                                            cat => (
-                                                <TouchableOpacity
-                                                    style={styles.modalItem}
-                                                    key={cat.id}
-                                                    onPress={() => {
-                                                        setGenre(cat.name);
-                                                        setShowGenres(!showGenres);
-                                                    }}
-                                                >
-                                                    <Text style={styles.modalText}>{cat.name}</Text>
-                                                </TouchableOpacity>
-                                            )
-                                        )
-                                    }
-                                </ScrollView>
-                            </View>
-                        </Modal>
 
-                        <View style={styles.genreContainer}>
-                            <TouchableOpacity
-                                onPress={() => setShowGenres(!showGenres)}
-                                style={styles.genreInput}
+                        <ScrollView contentContainerStyle={{paddingBottom: 20}}>
+                            <Modal
+                                visible={showGenres}
+                                animationType="fade"
+                                transparent={true}
+                                presentationStyle="overFullScreen"
+
                             >
-                                <Text style={styles.genreText}>
-                                    {
-                                        genres === null
-                                            ? "Escolha um genêro"
-                                            : genre
-                                    }
-                                </Text>
+                                <View style={styles.modalContainer}>
+                                    <ScrollView
+                                        contentContainerStyle={styles.modalContent}
+                                    >
+                                        {
+                                            genres.map(
+                                                cat => (
+                                                    <TouchableOpacity
+                                                        style={styles.modalItem}
+                                                        key={cat.id}
+                                                        onPress={() => {
+                                                            setGenre(cat.name);
+                                                            setShowGenres(!showGenres);
+                                                        }}
+                                                    >
+                                                        <Text style={styles.modalText}>{cat.name}</Text>
+                                                    </TouchableOpacity>
+                                                )
+                                            )
+                                        }
+                                    </ScrollView>
+                                </View>
+                            </Modal>
 
-                                <Image source={imgArrowDown} style={styles.imgArrowDown} />
-                            </TouchableOpacity>
-                        </View>
+                            <View style={styles.genreContainer}>
+                                <TouchableOpacity
+                                    onPress={() => setShowGenres(!showGenres)}
+                                    style={styles.genreInput}
+                                >
+                                    <Text style={styles.genreText}>
+                                        {
+                                            genres === null
+                                                ? "Escolha um genêro"
+                                                : genre
+                                        }
+                                    </Text>
 
-                        <ScrollView>
+                                    <Image source={imgArrowDown} style={styles.imgArrowDown} />
+                                </TouchableOpacity>
+                            </View>
                             {movies.map(movie => (
                                 <MovieCard
                                     key={movie.id}
@@ -206,8 +207,8 @@ const styles = StyleSheet.create({
     },
 
     imgArrowDown: {
-        width: 10,
-        height: 10,
+        width: 15,
+        height: 15,
     }
 })
 
