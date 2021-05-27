@@ -14,7 +14,6 @@ export async function userToken() {
 }
 
 //Movie Requests
-
 export async function getMovies() {
     try {
         const authToken = await userToken();
@@ -64,4 +63,21 @@ export async function addReview(id: number, data: string) {
         return e.message;
     }
 
+}
+
+//Genre Requests
+export async function getGenres() {
+    try {
+        const authToken = await userToken();
+        const res = await api.get(`/genres`,
+            {
+                headers: {
+                    Authorization: `Bearer ${authToken}`
+                }
+            }
+        );
+        return res.data;
+    } catch (e) {
+        return e;
+    }
 }

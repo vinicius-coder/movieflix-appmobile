@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     card: {
         width: 374,
         minHeight: 193,
-        marginTop: 20,
+        marginTop: 15,
         marginBottom: 10,
         borderRadius: 20,
         backgroundColor: colors.card,
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
 
     title: {
         marginLeft: 25,
-        marginVertical: 15,
+        marginVertical: 10,
         fontSize: 24,
         fontFamily: fonts.bold,
         color: colors.white,
