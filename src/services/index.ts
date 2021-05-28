@@ -14,10 +14,11 @@ export async function userToken() {
 }
 
 //Movie Requests
-export async function getMovies() {
+export async function getMovies(genreId: number) {
     try {
         const authToken = await userToken();
-        const res = await api.get('/movies?page=0&linesPerPage=12&direction=ASC&orderBy=title',
+        const res = await api.get(
+            `/movies?page=0&linesPerPage=12&direction=ASC&orderBy=title&genreId=${genreId}`,
             {
                 headers: {
                     Authorization: `Bearer ${authToken}`

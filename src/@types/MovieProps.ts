@@ -7,5 +7,6 @@ export interface MovieProps {
     synopsis: string;
     year: number;
     imgUrl: string;
+    genreId: number;
     reviews: ReviewProps [];
 }

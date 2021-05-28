@@ -17,31 +17,34 @@ const Dashboard: React.FC = () => {
 
     const [genres, setGenres] = useState<GenreProps[]>([]);
     const [showGenres, setShowGenres] = useState(false);
-    const [genre, setGenre] = useState('Escolha um genêro');
+    const [genre, setGenre] = useState<GenreProps>({
+        id: 0,
+        name: 'Escolha um gênero'
+    });
 
     const [movies, setMovies] = useState<MovieProps[]>([]);
 
     useEffect(() => {
 
         fillGenres();
-        fillMovies();
+        fillMovies(genre.id);
 
-    }, [])
+    }, [genre])
 
     async function fillGenres() {
         try {
             const res = await getGenres();
             setGenres(res);
-            console.log(genres);
+            //console.log(genres);
         } catch (e) {
             Alert.alert("Erro ao buscar genêros", e.message);
         }
     }
 
-    async function fillMovies() {
+    async function fillMovies(genreId: number) {
         try {
             setLoading(true)
-            const res = await getMovies();
+            const res = await getMovies(genreId);
             setMovies(res.data.content);
             //console.log(movies);
             setLoading(false);
@@ -51,6 +54,12 @@ const Dashboard: React.FC = () => {
         }
     }
 
+    // const data = 
+    //     genre.id !== 0
+    //         ? movies.filter((movie)=>
+    //             movie.genreId = genre.id
+    //         ) :
+    //         movies
 
     return (
 
@@ -61,15 +70,12 @@ const Dashboard: React.FC = () => {
                     <ActivityIndicator size="large" />
                 ) : (
                     <View>
-
-
-                        <ScrollView contentContainerStyle={{paddingBottom: 20}}>
+                        <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
                             <Modal
                                 visible={showGenres}
                                 animationType="fade"
                                 transparent={true}
                                 presentationStyle="overFullScreen"
-
                             >
                                 <View style={styles.modalContainer}>
                                     <ScrollView
@@ -82,7 +88,7 @@ const Dashboard: React.FC = () => {
                                                         style={styles.modalItem}
                                                         key={cat.id}
                                                         onPress={() => {
-                                                            setGenre(cat.name);
+                                                            setGenre(cat);
                                                             setShowGenres(!showGenres);
                                                         }}
                                                     >
@@ -104,7 +110,7 @@ const Dashboard: React.FC = () => {
                                         {
                                             genres === null
                                                 ? "Escolha um genêro"
-                                                : genre
+                                                : genre.name
                                         }
                                     </Text>
 
