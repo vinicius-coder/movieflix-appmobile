@@ -21,7 +21,7 @@ export const text = StyleSheet.create({
         color: colors.black,
         fontSize: 18,
         fontFamily: fonts.bold,
-        marginLeft: 45,
+        marginLeft: 50,
     },
 
     homeTitle: {

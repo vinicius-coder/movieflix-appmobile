@@ -8,6 +8,7 @@ import Dashboard from '../pages/Admin/Dashboard';
 import MovieDetails from '../pages/Admin/MovieDetails';
 
 import { colors, text } from '../styles/global';
+import NavBar from '../core/components/NavBar';
 
 const App = createStackNavigator();
 
@@ -18,11 +19,13 @@ const Routes: React.FC = () => {
     return (
         <App.Navigator
             screenOptions={{
-                headerTitle: 'Movieflix',
+                headerTitle: ' ',
                 headerStyle: {
                     backgroundColor: colors.primary,
                 },
-                //headerLeft: () => <HeaderText />,
+                headerTintColor: colors.secondary,
+                headerLeft: () => <HeaderText />,
+                headerRight: () => <NavBar />
             }}
         >
             <App.Screen name="Home" component={Home} />
