@@ -1,11 +1,20 @@
-import { api, TOKEN } from './index';
+import { api, TOKEN, userToken } from './index';
 import queryString from 'query-string';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
+import jwtDecode from 'jwt-decode';
 
 interface AuthProps {
     username: string;
     password: string;
+}
+
+export type Role = 'ROLE_MEMBER' | 'ROLE_VISITOR';
+
+type AccessToken = {
+    exp: number,
+    user_name: string,
+    authorities: Role[];
 }
 
 export async function login(userInfo: AuthProps) {
@@ -28,6 +37,8 @@ export async function login(userInfo: AuthProps) {
         Alert.alert('Erro ao realizar login', "Email ou senha inválidos");
     }
 }
+
+
 
 async function setAsyncKeys(key: string, value: string) {
     try {
@@ -54,4 +65,26 @@ export async function doLogout() {
     } catch (e) {
         console.warn(e);
     }
+}
+
+
+export const getAcessTokenDecoded = async () => {
+    const token = await AsyncStorage.getItem("@token") ?? '{}';
+
+    try {
+        const tokenDecode = jwtDecode(token);
+        return tokenDecode as AccessToken;
+    } catch (error) {
+        return {} as AccessToken;
+    }
+}
+
+export const isAllowedByRole = async (routeRoles: Role[] = []) => {
+
+    if (routeRoles.length === 0) {
+        return true;
+    }
+
+    const { authorities } = await getAcessTokenDecoded();
+    return routeRoles.some(role => authorities?.includes(role));
 }

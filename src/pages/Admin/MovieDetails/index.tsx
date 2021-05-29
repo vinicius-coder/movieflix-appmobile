@@ -4,6 +4,7 @@ import { MovieProps } from '../../../@types/MovieProps';
 import Review from '../../../core/components/Review';
 
 import { getMovieById } from '../../../services';
+import { isAllowedByRole } from '../../../services/authUser';
 
 import fonts from '../../../styles/fonts';
 import { colors } from '../../../styles/global';
@@ -17,14 +18,21 @@ const MovieDetails: React.FC = ({
     const [loading, setLoading] = useState(false);
     const [movie, setMovie] = useState<MovieProps>();
     const [review, setReview] = useState('');
+    const [showReview, setShowReview] = useState<boolean>();
 
     useEffect(() => {
         fillMovieById(id);
+        allowedReview();
     }, [])
 
+    async function allowedReview() {
+        const res = await isAllowedByRole(['ROLE_MEMBER']);
+        setShowReview(res);
+    }
+
     async function handleReview(id: number, review: string) {
-        console.log(review, id);
-        // const res = await addReview(id, review);
+        const res = await isAllowedByRole(['ROLE_MEMBER']);
+        setShowReview(res);
     }
 
     async function fillMovieById(id: number) {
@@ -32,7 +40,6 @@ const MovieDetails: React.FC = ({
             setLoading(true);
             const res = await getMovieById(id);
             setMovie(res);
-
             setLoading(false);
         } catch (e) {
             Alert.alert("Erro ao buscar filme no servidor.", e);
@@ -68,22 +75,24 @@ const MovieDetails: React.FC = ({
                                     </ScrollView>
                                 </View>
                             </View>
-
-                            <View style={styles.card}>
-                                <TextInput
-                                    value={review}
-                                    placeholder="Deixe sua avaliação aqui"
-                                    placeholderTextColor={colors.textColor}
-                                    style={styles.review}
-                                    onChangeText={(e) => setReview(e)}
-                                />
-                                <TouchableOpacity
-                                    onPress={() => { handleReview(id, review) }}
-                                    style={styles.button}
-                                >
-                                    <Text style={styles.buttonText}>Salvar avaliação</Text>
-                                </TouchableOpacity>
-                            </View>
+                            
+                            {showReview && (
+                                <View style={styles.card}>
+                                    <TextInput
+                                        value={review}
+                                        placeholder="Deixe sua avaliação aqui"
+                                        placeholderTextColor={colors.textColor}
+                                        style={styles.review}
+                                        onChangeText={(e) => setReview(e)}
+                                    />
+                                    <TouchableOpacity
+                                        onPress={() => { handleReview(id, review) }}
+                                        style={styles.button}
+                                    >
+                                        <Text style={styles.buttonText}>Salvar avaliação</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
 
                             <View style={styles.card}>
                                 <View style={styles.content}>

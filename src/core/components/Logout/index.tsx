@@ -12,7 +12,7 @@ const Logout: React.FC = () => {
     
     function logout() {
         doLogout();
-        navigation.navigate("Home");
+        navigation.navigate("Login");
     }
 
     return (

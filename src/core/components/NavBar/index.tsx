@@ -25,11 +25,6 @@ const NavBar: React.FC = () => {
         result ? setAuthenticated(true) : setAuthenticated(false);
     }
 
-    function logout() {
-        doLogout();
-        navigation.navigate("Home");
-    }
-
     return (
 
         <View

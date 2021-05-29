@@ -9,7 +9,7 @@ export const api = axios.create({
 export const TOKEN = "Basic bW92aWVmbGl4Om1vdmllZmxpeDEyMw==";
 
 export async function userToken() {
-    const token = await AsyncStorage.getItem("@token");
+    const token = await AsyncStorage.getItem("@token") ?? '{}';
     return token;
 }
 
