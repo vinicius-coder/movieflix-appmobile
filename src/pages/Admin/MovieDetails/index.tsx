@@ -32,14 +32,19 @@ const MovieDetails: React.FC = ({
 
     async function handleReview(movieId: number, text: string) {
 
-        try {
-            addReview(movieId, text);
-            Alert.alert("Sucesso", "Avaliação registrada com sucesso");
-            fillMovieById(id);
-        } catch (e) {
-            Alert.alert("Erro ao adicionar avaliação", e.message);
+        const newText = text.trim();
+
+        if (newText.length <= 1) {
+            Alert.alert("Atenção", "Review deve ter entre 2 a 100 caracteres")
+        } else {
+            try {
+                addReview(movieId, text);
+                Alert.alert("Sucesso", "Avaliação registrada com sucesso");
+                fillMovieById(id);
+            } catch (e) {
+                Alert.alert("Erro ao adicionar avaliação", e.message);
+            }
         }
-        
     }
 
     async function fillMovieById(id: number) {
