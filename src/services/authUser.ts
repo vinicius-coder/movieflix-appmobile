@@ -29,8 +29,12 @@ export async function login(userInfo: AuthProps) {
             },
         });
 
-        const { access_token } = result.data;
-        setAsyncKeys("@token", access_token);
+        const { access_token, userId } = result.data;
+
+        await AsyncStorage.multiSet([
+            ["@token", access_token],
+            ["@userId", JSON.stringify(userId)]
+        ]);
 
         return result;
     } catch (e) {

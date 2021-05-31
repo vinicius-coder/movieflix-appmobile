@@ -1,5 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
 
 export const api = axios.create({
     // baseURL: "https://viniciuscoder-movieflix.herokuapp.com",
@@ -11,6 +12,11 @@ export const TOKEN = "Basic bW92aWVmbGl4Om1vdmllZmxpeDEyMw==";
 export async function userToken() {
     const token = await AsyncStorage.getItem("@token") ?? '{}';
     return token;
+}
+
+export async function userTokenId() {
+    const userId = await AsyncStorage.getItem("@userId") ?? '{}';
+    return userId;
 }
 
 //Movie Requests
@@ -47,11 +53,23 @@ export async function getMovieById(id: number) {
     }
 }
 
-export async function addReview(id: number, data: string) {
+export async function addReview(movieId: number, text: string) {
 
     try {
         const authToken = await userToken();
-        const res = await api.post(`/movies/${id}`,
+        const userId = await userTokenId();
+
+        const data = {
+            movieId: movieId,
+            text: text,
+            user: {
+                id: userId
+            }
+        }
+
+        console.log(data)
+
+        const res = await api.post(`/reviews`,
             data,
             {
                 headers: {
@@ -70,6 +88,7 @@ export async function addReview(id: number, data: string) {
 export async function getGenres() {
     try {
         const authToken = await userToken();
+
         const res = await api.get(`/genres`,
             {
                 headers: {
