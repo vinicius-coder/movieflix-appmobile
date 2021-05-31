@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
         padding: 20,
     },
 
-    //Review Container
     reviewTitle: {
         fontSize: 22,
         fontFamily: fonts.bold,

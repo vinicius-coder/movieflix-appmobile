@@ -67,8 +67,6 @@ export async function addReview(movieId: number, text: string) {
             }
         }
 
-        console.log(data)
-
         const res = await api.post(`/reviews`,
             data,
             {

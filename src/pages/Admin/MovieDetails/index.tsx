@@ -220,7 +220,6 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
     },
 
-    //Review Container
     reviewTitle: {
         fontSize: 22,
         fontFamily: fonts.bold,

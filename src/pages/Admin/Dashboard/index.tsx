@@ -35,7 +35,6 @@ const Dashboard: React.FC = () => {
         try {
             const res = await getGenres();
             setGenres(res);
-            //console.log(genres);
         } catch (e) {
             Alert.alert("Erro ao buscar genêros", e.message);
         }
@@ -46,20 +45,11 @@ const Dashboard: React.FC = () => {
             setLoading(true)
             const res = await getMovies(genreId);
             setMovies(res.data.content);
-            //console.log(movies);
             setLoading(false);
         } catch (e) {
             Alert.alert("Erro ao buscar filmes no servidor", e.message);
-            console.log(e);
         }
     }
-
-    // const data = 
-    //     genre.id !== 0
-    //         ? movies.filter((movie)=>
-    //             movie.genreId = genre.id
-    //         ) :
-    //         movies
 
     return (
 
